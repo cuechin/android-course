@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         tools:context="qrcodescanner.masterteam.com.masterandroid.ui.home.HomeActivity">
 
+        <!-- This is for Adview [BORRAR] -->
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="0dp"
@@ -21,6 +22,7 @@
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toBottomOf="@+id/constraint_layout_generate_container" />
 
+        <!-- Coordinator Layout -->
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinator_layout_icon_extra_part_container"
             android:layout_width="0dp"
@@ -31,6 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/image_view_generate_active" />
 
+        <!-- 3 Constraint Layouts: -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_generate_container"
             android:layout_width="0dp"
@@ -64,6 +67,7 @@
             app:layout_constraintStart_toEndOf="@+id/constraint_layout_scan_container"
             app:layout_constraintTop_toBottomOf="@+id/view_drop_shadow" />
 
+        <!-- ImageView -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_generate"
             android:layout_width="@dimen/width_24"
@@ -75,6 +79,7 @@
             app:layout_constraintTop_toTopOf="@+id/constraint_layout_generate_container"
             app:layout_constraintVertical_chainStyle="packed" />
 
+        <!-- TextView -->
         <TextView
             android:id="@+id/text_view_generate"
             android:layout_width="wrap_content"
@@ -86,6 +91,7 @@
             app:layout_constraintStart_toStartOf="@+id/constraint_layout_generate_container"
             app:layout_constraintTop_toBottomOf="@+id/image_view_generate" />
 
+        <!-- ImageView -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_scan"
             android:layout_width="@dimen/width_24"
@@ -97,6 +103,7 @@
             app:layout_constraintTop_toTopOf="@+id/constraint_layout_scan_container"
             app:layout_constraintVertical_chainStyle="packed" />
 
+        <!-- TextView -->
         <TextView
             android:id="@+id/text_view_scan"
             android:layout_width="wrap_content"
@@ -108,6 +115,7 @@
             app:layout_constraintStart_toStartOf="@+id/constraint_layout_scan_container"
             app:layout_constraintTop_toBottomOf="@+id/image_view_scan" />
 
+        <!-- Image View  -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_history"
             android:layout_width="@dimen/width_24"
@@ -119,6 +127,7 @@
             app:layout_constraintTop_toTopOf="@+id/constraint_layout_history_container"
             app:layout_constraintVertical_chainStyle="packed" />
 
+        <!-- Text View  -->
         <TextView
             android:id="@+id/text_view_history"
             android:layout_width="wrap_content"
@@ -130,6 +139,7 @@
             app:layout_constraintStart_toStartOf="@+id/constraint_layout_history_container"
             app:layout_constraintTop_toBottomOf="@+id/image_view_history" />
 
+        <!-- View  -->
         <View
             android:id="@+id/view_drop_shadow"
             android:layout_width="0dp"
@@ -140,6 +150,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/coordinator_layout_icon_extra_part_container" />
 
+        <!-- 3 Image Views -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_generate_active"
             android:layout_width="@dimen/width_60"
@@ -176,6 +187,7 @@
             app:layout_constraintTop_toTopOf="@+id/constraint_layout_history_container"
             app:layout_constraintVertical_chainStyle="packed" />
 
+        <!-- QR Scanner base status bar -->
         <qrcodescanner.masterteam.com.masterandroid.helpers.widget.BaseStatusBar
             android:id="@+id/status_bar"
             android:layout_width="0dp"
@@ -186,6 +198,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
@@ -198,6 +211,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/status_bar" />
 
+        <!-- Constraint Layout -->
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinator_layout_fragment_container"
             android:layout_width="0dp"

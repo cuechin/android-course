@@ -27,7 +27,6 @@ import qrcodescanner.masterteam.com.masterandroid.databinding.ActivityHomeBindin
 import qrcodescanner.masterteam.com.masterandroid.helpers.util.PermissionUtil;
 import qrcodescanner.masterteam.com.masterandroid.ui.generate.GenerateFragment;
 import qrcodescanner.masterteam.com.masterandroid.ui.history.HistoryFragment;
-import qrcodescanner.masterteam.com.masterandroid.ui.settings.SettingsActivity;
 import qrcodescanner.masterteam.com.masterandroid.R;
 import qrcodescanner.masterteam.com.masterandroid.ui.scan.ScanFragment;
 
@@ -107,19 +106,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(mBinding.toolbar);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_toolbar_menu, menu);
         setToolbarMenu(menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
+
         }
 
         return super.onOptionsItemSelected(item);

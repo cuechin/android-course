@@ -21,7 +21,7 @@ package qrcodescanner.masterteam.com.masterandroid.helpers.itemtouch;
 /**
  * Interface to notify an item ViewHolder of relevant callbacks from {@link
  *
- * @author Paul Burke (ipaulpro)
+ * @author Andres Mora
  */
 public interface ItemTouchHelperViewHolder {
 

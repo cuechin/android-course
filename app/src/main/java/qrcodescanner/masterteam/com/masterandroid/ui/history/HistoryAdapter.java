@@ -48,21 +48,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         notifyDataSetChanged();
     }
 
-    public void setItemList(List<Code> itemList) {
-        mItemList = itemList;
-    }
-
-    public List<Code> getItems() {
-        return mItemList;
-    }
-
-    public void removeItem(Code item) {
-        int index = getItemPosition(item);
-        if (index < 0 || index >= mItemList.size()) return;
-        mItemList.remove(index);
-        notifyItemRemoved(index);
-    }
-
     public Code getItem(int position) {
         if (position < 0 || position >= mItemList.size()) return null;
         return mItemList.get(position);
@@ -90,16 +75,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         }
     }
 
-    public void addItemToPosition(Code item, int position) {
-        mItemList.add(position, item);
-        notifyItemInserted(position);
-    }
-
-    public void addItemToPosition(List<Code> item, int position) {
-        mItemList.addAll(position, item);
-        notifyItemRangeChanged(position, item.size());
-    }
-
     public Code findItem(Code item) {
         for (Code currentItem : mItemList) {
             if (isEqual(item, currentItem)) {
@@ -114,12 +89,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         mItemList.set(oldItemIndex, newItem);
         notifyItemChanged(oldItemIndex);
         return oldItemIndex;
-    }
-
-    public int updateItem(Code newItem, int position) {
-        mItemList.set(position, newItem);
-        notifyItemChanged(position);
-        return position;
     }
 
     @Override

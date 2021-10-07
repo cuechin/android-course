@@ -18,7 +18,6 @@ import qrcodescanner.masterteam.com.masterandroid.helpers.constant.IntentKey;
 import qrcodescanner.masterteam.com.masterandroid.helpers.model.Code;
 import qrcodescanner.masterteam.com.masterandroid.R;
 import qrcodescanner.masterteam.com.masterandroid.ui.scanresult.ScanResultActivity;
-import qrcodescanner.masterteam.com.masterandroid.ui.settings.SettingsActivity;
 
 public class PickedFromGalleryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -94,10 +93,6 @@ public class PickedFromGalleryActivity extends AppCompatActivity implements View
                 onBackPressed();
                 break;
 
-            case R.id.action_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-
             default:
                 break;
         }
@@ -105,12 +100,12 @@ public class PickedFromGalleryActivity extends AppCompatActivity implements View
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_toolbar_menu, menu);
         setToolbarMenu(menu);
         return true;
-    }
+    }*/
 
     @Override
     public void onClick(View v) {

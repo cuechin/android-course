@@ -55,11 +55,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.ui.settings.SettingsActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.GradientStatusBar" />
-        <activity
             android:name="qrcodescanner.masterteam.com.masterandroid.ui.generatedcode.GeneratedCodeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -74,17 +69,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />
-
-        <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.ui.about_us.AboutUsActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.GradientStatusBar" />
-
-        <activity android:name="qrcodescanner.masterteam.com.masterandroid.ui.privacy_policy.PrivayPolicyActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.GradientStatusBar"></activity>
     </application>
 
 </manifest>

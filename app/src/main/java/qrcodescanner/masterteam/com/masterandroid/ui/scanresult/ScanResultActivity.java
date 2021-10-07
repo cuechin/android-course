@@ -38,7 +38,6 @@ import qrcodescanner.masterteam.com.masterandroid.helpers.model.Code;
 import qrcodescanner.masterteam.com.masterandroid.helpers.util.SharedPrefUtil;
 import qrcodescanner.masterteam.com.masterandroid.helpers.util.TimeUtil;
 import qrcodescanner.masterteam.com.masterandroid.helpers.util.database.DatabaseUtil;
-import qrcodescanner.masterteam.com.masterandroid.ui.settings.SettingsActivity;
 import qrcodescanner.masterteam.com.masterandroid.R;
 
 public class ScanResultActivity extends AppCompatActivity implements View.OnClickListener {
@@ -223,10 +222,6 @@ public class ScanResultActivity extends AppCompatActivity implements View.OnClic
                 onBackPressed();
                 break;
 
-            case R.id.action_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-
             default:
                 break;
         }
@@ -234,12 +229,12 @@ public class ScanResultActivity extends AppCompatActivity implements View.OnClic
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_toolbar_menu, menu);
         setToolbarMenu(menu);
         return true;
-    }
+    }*/
 
     @Override
     public void onClick(View v) {

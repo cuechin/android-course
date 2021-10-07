@@ -1,6 +1,6 @@
 package qrcodescanner.masterteam.com.masterandroid.helpers.constant;
 
-public interface AppConstants {
+public interface  AppConstants {
     String PREFIX_IMAGE = "IMG_";
     String SUFFIX_IMAGE = ".png";
     String PREFIX_CODE = "CODE_";

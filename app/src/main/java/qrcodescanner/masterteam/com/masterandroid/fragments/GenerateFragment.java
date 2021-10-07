@@ -30,7 +30,6 @@ public class GenerateFragment extends androidx.fragment.app.Fragment implements 
 
     private FragmentGenerateBinding mBinding;
     private Context mContext;
-    private InterstitialAd mInterstitialAd;
 
     public GenerateFragment() {
 
@@ -62,7 +61,6 @@ public class GenerateFragment extends androidx.fragment.app.Fragment implements 
     @Override
     public void onResume() {
         super.onResume();
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     private void initializeAd() {
@@ -70,8 +68,7 @@ public class GenerateFragment extends androidx.fragment.app.Fragment implements 
             return;
         }
 
-        mInterstitialAd = new InterstitialAd(mContext);
-        mInterstitialAd.setAdUnitId(getString(R.string.admob_test_interstitial_ad_unit_id));
+
     }
 
     private void setListeners() {
@@ -90,33 +87,6 @@ public class GenerateFragment extends androidx.fragment.app.Fragment implements 
 
         mBinding.textViewGenerate.setOnClickListener(this);
 
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when the ad is displayed.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when when the interstitial ad is closed.
-                generateCode();
-            }
-        });
     }
 
     private void initializeCodeTypesSpinner() {
@@ -134,11 +104,7 @@ public class GenerateFragment extends androidx.fragment.app.Fragment implements 
 
         switch (view.getId()) {
             case R.id.text_view_generate:
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    generateCode();
-                }
+                generateCode();
                 break;
 
             default:

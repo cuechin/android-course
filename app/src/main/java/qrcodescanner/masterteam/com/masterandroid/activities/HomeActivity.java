@@ -2,16 +2,10 @@ package qrcodescanner.masterteam.com.masterandroid.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +13,6 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import qrcodescanner.masterteam.com.masterandroid.databinding.ActivityHomeBinding;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.PermissionUtil;
 import qrcodescanner.masterteam.com.masterandroid.fragments.GenerateFragment;
@@ -32,15 +23,6 @@ import qrcodescanner.masterteam.com.masterandroid.fragments.ScanFragment;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityHomeBinding mBinding;
-    private Menu mToolbarMenu;
-
-    public Menu getToolbarMenu() {
-        return mToolbarMenu;
-    }
-
-    public void setToolbarMenu(Menu toolbarMenu) {
-        mToolbarMenu = toolbarMenu;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,65 +34,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setListeners();
         initializeToolbar();
         initializeBottomBar();
-        checkInternetConnection();
-        playAd();
-    }
-
-    private void checkInternetConnection() {
-        CompositeDisposable disposable = new CompositeDisposable();
-        disposable.add(ReactiveNetwork
-                .observeNetworkConnectivity(this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(connectivity -> {
-                    if (connectivity.state() == NetworkInfo.State.CONNECTED) {
-                        mBinding.adView.setVisibility(View.VISIBLE);
-                    } else {
-                        mBinding.adView.setVisibility(View.GONE);
-                    }
-
-                }, throwable -> {
-                    Toast.makeText(this, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
-                }));
-    }
-
-    private void playAd() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mBinding.adView.loadAd(adRequest);
-        mBinding.adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                mBinding.adView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAdOpened() {
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-            }
-
-            @Override
-            public void onAdClosed() {
-            }
-        });
     }
 
     private void initializeToolbar() {
         setSupportActionBar(mBinding.toolbar);
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_toolbar_menu, menu);
-        setToolbarMenu(menu);
-        return true;
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -140,23 +68,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void clickOnGenerate() {
-        mBinding.textViewGenerate.setTextColor(
-                ContextCompat.getColor(this, R.color.bottom_bar_selected));
-
-        mBinding.textViewScan.setTextColor(
-                ContextCompat.getColor(this, R.color.bottom_bar_normal));
-
-        mBinding.textViewHistory.setTextColor(
-                ContextCompat.getColor(this, R.color.bottom_bar_normal));
-
-        mBinding.imageViewGenerate.setVisibility(View.INVISIBLE);
-        mBinding.imageViewGenerateActive.setVisibility(View.VISIBLE);
-
-        mBinding.imageViewScan.setVisibility(View.VISIBLE);
-        mBinding.imageViewScanActive.setVisibility(View.INVISIBLE);
-
-        mBinding.imageViewHistory.setVisibility(View.VISIBLE);
-        mBinding.imageViewHistoryActive.setVisibility(View.INVISIBLE);
 
         setToolbarTitle(getString(R.string.toolbar_title_generate));
         showFragment(GenerateFragment.newInstance());
@@ -176,26 +87,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             mBinding.textViewHistory.setTextColor(
                     ContextCompat.getColor(this, R.color.bottom_bar_normal));
 
-            mBinding.imageViewGenerate.setVisibility(View.VISIBLE);
-            mBinding.imageViewGenerateActive.setVisibility(View.INVISIBLE);
-
-            mBinding.imageViewScan.setVisibility(View.INVISIBLE);
-            mBinding.imageViewScanActive.setVisibility(View.VISIBLE);
-
-            mBinding.imageViewHistory.setVisibility(View.VISIBLE);
-            mBinding.imageViewHistoryActive.setVisibility(View.INVISIBLE);
-
             setToolbarTitle(getString(R.string.toolbar_title_scan));
-
-        /*IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setBeepEnabled(SharedPrefUtil.readBooleanDefaultTrue(PreferenceKey.PLAY_SOUND));
-        integrator.setOrientationLocked(false);
-        integrator.setPrompt("Scan a barcode");
-        integrator.initiateScan();
-
-        *//*
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-         */
             showFragment(ScanFragment.newInstance());
         }
     }
@@ -209,15 +101,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         mBinding.textViewHistory.setTextColor(
                 ContextCompat.getColor(this, R.color.bottom_bar_selected));
-
-        mBinding.imageViewGenerate.setVisibility(View.VISIBLE);
-        mBinding.imageViewGenerateActive.setVisibility(View.INVISIBLE);
-
-        mBinding.imageViewScan.setVisibility(View.VISIBLE);
-        mBinding.imageViewScanActive.setVisibility(View.INVISIBLE);
-
-        mBinding.imageViewHistory.setVisibility(View.INVISIBLE);
-        mBinding.imageViewHistoryActive.setVisibility(View.VISIBLE);
 
         setToolbarTitle(getString(R.string.toolbar_title_history));
         showFragment(HistoryFragment.newInstance());
@@ -277,16 +160,4 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
-  /*  public void hideAdMob()
-    {
-        if (mBinding.adView.isShown())
-            mBinding.adView.setVisibility(View.GONE);
-    }
-
-    public void showAdmob()
-    {
-        if (!mBinding.adView.isShown())
-            mBinding.adView.setVisibility(View.VISIBLE);
-    }*/
 }

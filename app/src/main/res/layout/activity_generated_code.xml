@@ -135,6 +135,7 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:visibility="invisible"
                     android:id="@+id/image_view_print"
                     android:layout_width="@dimen/width_64"
                     android:layout_height="@dimen/height_64"

@@ -7,9 +7,8 @@ import com.google.android.gms.ads.MobileAds;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import qrcodescanner.masterteam.com.masterandroid.R;
-import qrcodescanner.masterteam.com.masterandroid.helpers.util.SharedPrefUtil;
-import qrcodescanner.masterteam.com.masterandroid.helpers.util.database.DatabaseUtil;
+import qrcodescanner.masterteam.com.masterandroid.utils.util.SharedPrefUtil;
+import qrcodescanner.masterteam.com.masterandroid.utils.util.database.DatabaseUtil;
 
 public class QRCobaApplication extends MultiDexApplication {
 

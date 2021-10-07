@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="qrcodescanner.masterteam.com.masterandroid.ui.home.HomeActivity">
+        tools:context="qrcodescanner.masterteam.com.masterandroid.activities.HomeActivity">
 
         <!-- This is for Adview [BORRAR] -->
         <com.google.android.gms.ads.AdView
@@ -188,7 +188,7 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <!-- QR Scanner base status bar -->
-        <qrcodescanner.masterteam.com.masterandroid.helpers.widget.BaseStatusBar
+        <qrcodescanner.masterteam.com.masterandroid.utils.widget.BaseStatusBar
             android:id="@+id/status_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

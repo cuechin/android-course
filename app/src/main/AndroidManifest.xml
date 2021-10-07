@@ -39,7 +39,7 @@
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.ui.splash.SplashActivity"
+            android:name="qrcodescanner.masterteam.com.masterandroid.activities.SplashActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
@@ -50,22 +50,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.ui.home.HomeActivity"
+            android:name="qrcodescanner.masterteam.com.masterandroid.activities.HomeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.ui.generatedcode.GeneratedCodeActivity"
+            android:name="qrcodescanner.masterteam.com.masterandroid.activities.GeneratedCodeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.ui.scanresult.ScanResultActivity"
+            android:name="qrcodescanner.masterteam.com.masterandroid.activities.ScanResultActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.ui.pickedfromgallery.PickedFromGalleryActivity"
+            android:name="qrcodescanner.masterteam.com.masterandroid.activities.PickedFromGalleryActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />

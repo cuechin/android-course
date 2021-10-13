@@ -6,11 +6,8 @@ public class ImageInfo {
     private Uri mImageUri;
     private boolean mTakenByCamera;
 
-    public ImageInfo() {
-    }
-
     public ImageInfo(Uri imageUri, boolean takenByCamera) {
-        mImageUri = imageUri;
+        mImageUri = imageUri; 
         mTakenByCamera = takenByCamera;
     }
 
@@ -18,15 +15,4 @@ public class ImageInfo {
         return mImageUri;
     }
 
-    public void setImageUri(Uri imageUri) {
-        mImageUri = imageUri;
-    }
-
-    public boolean isTakenByCamera() {
-        return mTakenByCamera;
-    }
-
-    public void setTakenByCamera(boolean takenByCamera) {
-        mTakenByCamera = takenByCamera;
-    }
 }

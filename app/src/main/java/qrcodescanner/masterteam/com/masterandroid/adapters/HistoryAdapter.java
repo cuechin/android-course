@@ -20,14 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import qrcodescanner.masterteam.com.masterandroid.databinding.ItemHistoryBinding;
 import qrcodescanner.masterteam.com.masterandroid.utils.constant.AppConstants;
-import qrcodescanner.masterteam.com.masterandroid.utils.itemtouch.ItemTouchHelperAdapter;
 import qrcodescanner.masterteam.com.masterandroid.models.Code;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.TimeUtil;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.database.DatabaseUtil;
 import qrcodescanner.masterteam.com.masterandroid.R;
 import qrcodescanner.masterteam.com.masterandroid.interfaces.ItemClickListener;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> implements ItemTouchHelperAdapter {
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
     /**
      * Fields
      */
@@ -111,19 +110,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             holder.bind(item);
     }
 
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        return false;
-    }
-
-    @Override
+    /*@Override
     public void onItemDismiss(int position) {
         AsyncTask.execute(() -> {
             DatabaseUtil.on().deleteEntity(getItem(position));
             mItemList.remove(position);
         });
 
-    }
+    }*/
 
     class HistoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

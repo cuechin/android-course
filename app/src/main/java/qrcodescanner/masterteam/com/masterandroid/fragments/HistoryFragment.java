@@ -21,8 +21,6 @@ import io.reactivex.schedulers.Schedulers;
 import qrcodescanner.masterteam.com.masterandroid.adapters.HistoryAdapter;
 import qrcodescanner.masterteam.com.masterandroid.databinding.FragmentHistoryBinding;
 import qrcodescanner.masterteam.com.masterandroid.utils.constant.IntentKey;
-import qrcodescanner.masterteam.com.masterandroid.utils.itemtouch.OnStartDragListener;
-import qrcodescanner.masterteam.com.masterandroid.utils.itemtouch.SimpleItemTouchHelperCallback;
 import qrcodescanner.masterteam.com.masterandroid.models.Code;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.ProgressDialogUtil;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.database.DatabaseUtil;
@@ -30,12 +28,11 @@ import qrcodescanner.masterteam.com.masterandroid.activities.ScanResultActivity;
 import qrcodescanner.masterteam.com.masterandroid.R;
 import qrcodescanner.masterteam.com.masterandroid.interfaces.ItemClickListener;
 
-public class HistoryFragment extends Fragment implements OnStartDragListener, ItemClickListener<Code> {
+public class HistoryFragment extends Fragment implements ItemClickListener<Code> {
 
     private Context mContext;
     private FragmentHistoryBinding mBinding;
     private CompositeDisposable mCompositeDisposable;
-    private ItemTouchHelper mItemTouchHelper;
     private HistoryAdapter mAdapter;
 
     private CompositeDisposable getCompositeDisposable() {
@@ -76,9 +73,6 @@ public class HistoryFragment extends Fragment implements OnStartDragListener, It
             mBinding.recyclerViewHistory.setItemAnimator(new DefaultItemAnimator());
             mAdapter = new HistoryAdapter(this);
             mBinding.recyclerViewHistory.setAdapter(mAdapter);
-            ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
-            mItemTouchHelper = new ItemTouchHelper(callback);
-            mItemTouchHelper.attachToRecyclerView(mBinding.recyclerViewHistory);
         }
     }
 
@@ -112,12 +106,7 @@ public class HistoryFragment extends Fragment implements OnStartDragListener, It
 
     private HistoryAdapter getAdapter() {
         return (HistoryAdapter) mBinding.recyclerViewHistory.getAdapter();
-    }
-
-    @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
-    }
+    } 
 
     @Override
     public void onItemClick(View view, Code item, int position) {

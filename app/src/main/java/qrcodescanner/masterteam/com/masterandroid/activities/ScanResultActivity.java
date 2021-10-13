@@ -77,60 +77,14 @@ public class ScanResultActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_scan_result);
         setCompositeDisposable(new CompositeDisposable());
-        playAd();
         getWindow().setBackgroundDrawable(null);
         initializeToolbar();
         loadQRCode();
         setListeners();
-        checkInternetConnection();
-    }
-    private void playAd() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mBinding.adView.loadAd(adRequest);
-        mBinding.adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                mBinding.adView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAdOpened() {
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-            }
-
-            @Override
-            public void onAdClosed() {
-            }
-        });
-    }
-    private void checkInternetConnection() {
-        CompositeDisposable disposable = new CompositeDisposable();
-        disposable.add(ReactiveNetwork
-                .observeNetworkConnectivity(this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(connectivity -> {
-                    if (connectivity.state() == NetworkInfo.State.CONNECTED ) {
-                        mBinding.adView.setVisibility(View.VISIBLE);
-                    }else {
-                        mBinding.adView.setVisibility(View.GONE);
-                    }
-
-                }, throwable -> {
-                    Toast.makeText(this,  getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
-                }));
     }
 
     private void setListeners() {
         mBinding.textViewOpenInBrowser.setOnClickListener(this);
-        mBinding.imageViewShare.setOnClickListener(this);
     }
 
     private void loadQRCode() {
@@ -241,12 +195,6 @@ public class ScanResultActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
 
-            case R.id.image_view_share:
-                if (getCurrentCode() != null) {
-                    shareCode(new File(getCurrentCode().getCodeImagePath()));
-                }
-                break;
-
             default:
                 break;
         }
@@ -262,20 +210,5 @@ public class ScanResultActivity extends AppCompatActivity implements View.OnClic
                 && !mIsHistory && !mIsPickedFromGallery) {
             new File(getCurrentCode().getCodeImagePath()).delete();
         }
-    }
-
-    private void shareCode(File codeImageFile) {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("image/*");
-
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            shareIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this,
-                    getString(R.string.file_provider_authority), codeImageFile));
-            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        } else {
-            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(codeImageFile));
-        }
-
-        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_code_using)));
     }
 }

@@ -60,7 +60,6 @@ public class GeneratedCodeActivity extends AppCompatActivity implements View.OnC
 
     private final int REQUEST_CODE_TO_SHARE = 1;
     private final int REQUEST_CODE_TO_SAVE = 2;
-    private final int REQUEST_CODE_TO_PRINT = 3;
 
     private ActivityGeneratedCodeBinding mBinding;
     private Menu mToolbarMenu;
@@ -77,14 +76,6 @@ public class GeneratedCodeActivity extends AppCompatActivity implements View.OnC
         mCompositeDisposable = compositeDisposable;
     }
 
-    public File getCurrentPrintedFile() {
-        return mCurrentPrintedFile;
-    }
-
-    public void setCurrentPrintedFile(File currentPrintedFile) {
-        mCurrentPrintedFile = currentPrintedFile;
-    }
-
     public File getCurrentCodeFile() {
         return mCurrentCodeFile;
     }
@@ -99,14 +90,6 @@ public class GeneratedCodeActivity extends AppCompatActivity implements View.OnC
 
     public void setCurrentCode(Code currentCode) {
         mCurrentCode = currentCode;
-    }
-
-    public Menu getToolbarMenu() {
-        return mToolbarMenu;
-    }
-
-    public void setToolbarMenu(Menu toolbarMenu) {
-        mToolbarMenu = toolbarMenu;
     }
 
     @Override
@@ -215,18 +198,6 @@ public class GeneratedCodeActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.image_view_print:
-                if (PermissionUtil.on().requestPermission(this,
-                        REQUEST_CODE_TO_PRINT, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    if (getCurrentPrintedFile() == null) {
-                        storeCodeDocument();
-                    } else {
-                        Toast.makeText(this,
-                                getString(R.string.generated_qr_code_already_exists),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-                break;
 
             case R.id.image_view_save:
                 if (PermissionUtil.on().requestPermission(this,
@@ -322,140 +293,6 @@ public class GeneratedCodeActivity extends AppCompatActivity implements View.OnC
                         }));
     }
 
-    private void storeCodeDocument() {
-        ProgressDialogUtil.on().showProgressDialog(this);
-
-        getCompositeDisposable().add(
-                Completable.create(emitter -> {
-                    String type = getResources().getStringArray(R.array.code_types)[getCurrentCode().getType()];
-                    File codeDocumentFile = FileUtil.getEmptyFile(this, AppConstants.PREFIX_CODE,
-                            String.format(Locale.ENGLISH, getString(R.string.file_name_body),
-                                    type.substring(0, type.indexOf(" Code")),
-                                    String.valueOf(System.currentTimeMillis())),
-                            AppConstants.SUFFIX_CODE,
-                            Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ?
-                                    Environment.DIRECTORY_PICTURES : Environment.DIRECTORY_DOCUMENTS);
-
-                    if (codeDocumentFile != null && mCurrentGeneratedCodeBitmap != null && getCurrentCode() != null) {
-                        try {
-                            Document document = new Document();
-
-                            PdfWriter.getInstance(document, new FileOutputStream(codeDocumentFile));
-
-                            document.open();
-                            document.setPageSize(PageSize.A4);
-                            document.addCreationDate();
-                            document.addAuthor(getString(R.string.app_name));
-                            document.addCreator(getString(R.string.app_name));
-
-                            BaseColor colorAccent = new BaseColor(0, 153, 204, 255);
-                            float headingFontSize = 20.0f;
-                            float valueFontSize = 26.0f;
-
-                            BaseFont baseFont = BaseFont.createFont("res/font/opensans_regular.ttf", "UTF-8", BaseFont.EMBEDDED);
-
-                            LineSeparator lineSeparator = new LineSeparator();
-                            lineSeparator.setLineColor(new BaseColor(0, 0, 0, 68));
-
-                            // Adding Title....
-                            Font mOrderDetailsTitleFont = new Font(baseFont, 36.0f, Font.NORMAL, BaseColor.BLACK);
-                            Chunk mOrderDetailsTitleChunk = new Chunk("Code Details", mOrderDetailsTitleFont);
-                            Paragraph mOrderDetailsTitleParagraph = new Paragraph(mOrderDetailsTitleChunk);
-                            mOrderDetailsTitleParagraph.setAlignment(Element.ALIGN_CENTER);
-                            document.add(mOrderDetailsTitleParagraph);
-
-                            document.add(new Paragraph(AppConstants.EMPTY_STRING));
-                            document.add(Chunk.NEWLINE);
-                            document.add(new Paragraph(AppConstants.EMPTY_STRING));
-                            document.add(new Paragraph(AppConstants.EMPTY_STRING));
-                            document.add(Chunk.NEWLINE);
-                            document.add(new Paragraph(AppConstants.EMPTY_STRING));
-
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            mCurrentGeneratedCodeBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                            Image codeImage = Image.getInstance(stream.toByteArray());
-                            codeImage.setAlignment(Image.ALIGN_CENTER);
-                            codeImage.scalePercent(40);
-                            Paragraph imageParagraph = new Paragraph();
-                            imageParagraph.add(codeImage);
-                            document.add(imageParagraph);
-
-                            document.add(new Paragraph(AppConstants.EMPTY_STRING));
-                            document.add(Chunk.NEWLINE);
-                            document.add(new Paragraph(AppConstants.EMPTY_STRING));
-
-                            // Adding Chunks for Title and value
-                            Font mOrderIdFont = new Font(baseFont, headingFontSize, Font.NORMAL, colorAccent);
-                            Chunk mOrderIdChunk = new Chunk("Content:", mOrderIdFont);
-                            Paragraph mOrderIdParagraph = new Paragraph(mOrderIdChunk);
-                            document.add(mOrderIdParagraph);
-
-                            Font mOrderIdValueFont = new Font(baseFont, valueFontSize, Font.NORMAL, BaseColor.BLACK);
-                            Chunk mOrderIdValueChunk = new Chunk(getCurrentCode().getContent(), mOrderIdValueFont);
-                            Paragraph mOrderIdValueParagraph = new Paragraph(mOrderIdValueChunk);
-                            document.add(mOrderIdValueParagraph);
-
-                            document.add(new Paragraph(AppConstants.EMPTY_STRING));
-                            document.add(Chunk.NEWLINE);
-                            document.add(new Paragraph(AppConstants.EMPTY_STRING));
-
-                            // Fields of Order Details...
-                            Font mOrderDateFont = new Font(baseFont, headingFontSize, Font.NORMAL, colorAccent);
-                            Chunk mOrderDateChunk = new Chunk("Type:", mOrderDateFont);
-                            Paragraph mOrderDateParagraph = new Paragraph(mOrderDateChunk);
-                            document.add(mOrderDateParagraph);
-
-                            Font mOrderDateValueFont = new Font(baseFont, valueFontSize, Font.NORMAL, BaseColor.BLACK);
-                            Chunk mOrderDateValueChunk = new Chunk(type, mOrderDateValueFont);
-                            Paragraph mOrderDateValueParagraph = new Paragraph(mOrderDateValueChunk);
-                            document.add(mOrderDateValueParagraph);
-
-                            document.close();
-
-                            setCurrentPrintedFile(codeDocumentFile);
-                            if (!emitter.isDisposed()) {
-                                emitter.onComplete();
-                            }
-                        } catch (IOException | DocumentException ie) {
-                            if (!emitter.isDisposed()) {
-                                emitter.onError(ie);
-                            }
-                        } catch (ActivityNotFoundException ae) {
-                            if (!emitter.isDisposed()) {
-                                emitter.onError(ae);
-                            }
-                        }
-                    } else {
-                        if (!emitter.isDisposed()) {
-                            emitter.onError(new NullPointerException());
-                        }
-                    }
-                }).observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribeWith(new DisposableCompletableObserver() {
-                            @Override
-                            public void onComplete() {
-                                ProgressDialogUtil.on().hideProgressDialog();
-                                Toast.makeText(GeneratedCodeActivity.this,
-                                        getString(R.string.saved_the_code_successfully),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                if (e != null && !TextUtils.isEmpty(e.getMessage())) {
-                                    Log.e(getClass().getSimpleName(), e.getMessage());
-                                }
-
-                                ProgressDialogUtil.on().hideProgressDialog();
-                                Toast.makeText(GeneratedCodeActivity.this,
-                                        getString(R.string.failed_to_save_the_code),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        })
-        );
-    }
-
     private void shareCode(File codeImageFile) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
@@ -488,18 +325,6 @@ public class GeneratedCodeActivity extends AppCompatActivity implements View.OnC
                 if (isValid) {
                     if (getCurrentCodeFile() == null) {
                         storeCodeImage(true);
-                    } else {
-                        Toast.makeText(this,
-                                getString(R.string.generated_qr_code_already_exists),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-                break;
-
-            case REQUEST_CODE_TO_PRINT:
-                if (isValid) {
-                    if (getCurrentPrintedFile() == null) {
-                        storeCodeDocument();
                     } else {
                         Toast.makeText(this,
                                 getString(R.string.generated_qr_code_already_exists),

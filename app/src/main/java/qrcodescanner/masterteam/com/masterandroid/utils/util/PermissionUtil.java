@@ -33,17 +33,9 @@ public class PermissionUtil {
                 REQUEST_CODE_PERMISSION_DEFAULT, Arrays.asList(permissions));
     }
 
-    public synchronized boolean requestPermission(Fragment fragment, String... permissions) {
-        return requestPermission(fragment, null, REQUEST_CODE_PERMISSION_DEFAULT, Arrays.asList(permissions));
-    }
-
     public synchronized boolean requestPermission(Activity activity, int requestCode,
                                                   String... permissions) {
         return requestPermission(null, activity, requestCode, Arrays.asList(permissions));
-    }
-
-    public synchronized boolean requestPermission(Fragment fragment, int requestCode, String... permissions) {
-        return requestPermission(fragment, null, requestCode, Arrays.asList(permissions));
     }
 
     private boolean requestPermission(Fragment fragment, Activity activity,

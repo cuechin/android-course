@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name="qrcodescanner.masterteam.com.masterandroid.QRCobaApplication"
+        android:name=".QRCobaApplication"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".activities.PickedFromGalleryActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -33,13 +36,14 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
-
-        <activity
+        <!--
+<activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
+        -->
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.activities.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
@@ -50,22 +54,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.activities.HomeActivity"
+            android:name=".activities.HomeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />
+
         <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.activities.GeneratedCodeActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.GradientStatusBar" />
-        <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.activities.ScanResultActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.GradientStatusBar" />
-        <activity
-            android:name="qrcodescanner.masterteam.com.masterandroid.activities.PickedFromGalleryActivity"
+            android:name=".activities.ScanResultActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />

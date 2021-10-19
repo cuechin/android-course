@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
+import androidx.fragment.app.Fragment;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
 
 import qrcodescanner.masterteam.com.masterandroid.QRCobaApplication;
 

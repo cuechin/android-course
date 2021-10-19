@@ -20,18 +20,18 @@
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/toolbar_height"
-            android:background="@drawable/gradient_title_bar_primary_color_and_accent_color"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-            app:contentInsetStartWithNavigation="@dimen/margin_0"
-            app:layout_constraintBottom_toTopOf="@+id/scroll_view_body_container"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status_bar"
-            app:title="@string/toolbar_title_scan_result" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/toolbar_height"
+                android:background="@drawable/gradient_title_bar_primary_color_and_accent_color"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+                app:contentInsetStartWithNavigation="@dimen/margin_0"
+                app:layout_constraintBottom_toTopOf="@+id/scroll_view_body_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/status_bar"
+                app:title="@string/toolbar_title_scan_result" />
 
         <ScrollView
             android:id="@+id/scroll_view_body_container"
@@ -51,7 +51,7 @@
                     android:id="@+id/image_view_scanned_code"
                     android:layout_width="@dimen/width_250"
                     android:layout_height="@dimen/height_250"
-                   android:layout_marginTop="@dimen/margin_32"
+                    android:layout_marginTop="@dimen/margin_32"
                     android:layout_marginEnd="@dimen/margin_32"
                     android:layout_marginStart="@dimen/margin_32"
                     android:layout_marginBottom="@dimen/margin_16"
@@ -156,8 +156,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scroll_view_body_container" />
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </layout>

@@ -1,6 +1,5 @@
 package qrcodescanner.masterteam.com.masterandroid.fragments;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.loader.content.CursorLoader;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -40,26 +45,20 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.loader.content.CursorLoader;
-
+import qrcodescanner.masterteam.com.masterandroid.R;
+import qrcodescanner.masterteam.com.masterandroid.activities.PickedFromGalleryActivity;
+import qrcodescanner.masterteam.com.masterandroid.activities.ScanResultActivity;
+import qrcodescanner.masterteam.com.masterandroid.models.Code;
 import qrcodescanner.masterteam.com.masterandroid.utils.constant.AppConstants;
 import qrcodescanner.masterteam.com.masterandroid.utils.constant.IntentKey;
 import qrcodescanner.masterteam.com.masterandroid.utils.constant.PreferenceKey;
-import qrcodescanner.masterteam.com.masterandroid.models.Code;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.FileUtil;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.ProgressDialogUtil;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.SharedPrefUtil;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.image.ImageInfo;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.image.ImagePicker;
-import qrcodescanner.masterteam.com.masterandroid.activities.PickedFromGalleryActivity;
-import qrcodescanner.masterteam.com.masterandroid.activities.ScanResultActivity;
-import qrcodescanner.masterteam.com.masterandroid.R;
 
-
-public class ScanFragment extends androidx.fragment.app.Fragment implements View.OnClickListener {
+public class ScanFragment extends Fragment implements View.OnClickListener {
 
     private Context mContext;
     private Activity mActivity;
@@ -336,6 +335,4 @@ public class ScanFragment extends androidx.fragment.app.Fragment implements View
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
-
-
 }

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import qrcodescanner.masterteam.com.masterandroid.databinding.ActivityHomeBinding;
 import qrcodescanner.masterteam.com.masterandroid.R;
+import qrcodescanner.masterteam.com.masterandroid.fragments.GenerateFragment;
 import qrcodescanner.masterteam.com.masterandroid.fragments.ScanFragment;
 import qrcodescanner.masterteam.com.masterandroid.utils.util.PermissionUtil;
 
@@ -65,6 +66,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         clickOnScan();
     }
 
+    private void clickOnGenerate() {
+
+        setToolbarTitle(getString(R.string.toolbar_title_generate));
+        showFragment(GenerateFragment.newInstance());
+    }
+
     private void clickOnScan() {
         if (PermissionUtil.on().requestPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)) {
@@ -84,11 +91,29 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /*private void clickOnHistory() {
+        mBinding.textViewGenerate.setTextColor(
+                ContextCompat.getColor(this, R.color.bottom_bar_normal));
+
+        mBinding.textViewScan.setTextColor(
+                ContextCompat.getColor(this, R.color.bottom_bar_normal));
+
+        mBinding.textViewHistory.setTextColor(
+                ContextCompat.getColor(this, R.color.bottom_bar_selected));
+
+        setToolbarTitle(getString(R.string.toolbar_title_history));
+        showFragment(HistoryFragment.newInstance());
+    }*/
+
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
+            case R.id.image_view_generate:
+            case R.id.text_view_generate:
+            case R.id.constraint_layout_generate_container:
+                clickOnGenerate();
+                break;
 
             case R.id.image_view_scan:
             case R.id.text_view_scan:
@@ -96,6 +121,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 clickOnScan();
                 break;
 
+            /*case R.id.image_view_history:
+            case R.id.text_view_history:
+            case R.id.constraint_layout_history_container:
+                clickOnHistory();
+                break;
+            */
 
         }
     }

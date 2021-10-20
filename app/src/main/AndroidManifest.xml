@@ -58,7 +58,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.GradientStatusBar" />
-
+        <activity
+            android:name=".activities.GeneratedCodeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.GradientStatusBar" />
         <activity
             android:name=".activities.ScanResultActivity"
             android:launchMode="singleTop"
